@@ -70,6 +70,7 @@ public class Network {
             double[] weightSum = new double[neuronCount];
             for (int i = 0; i < neuronCount; i++) {
                 weightSum[i] = neurons[i].calculateWeightSum();
+                System.out.println(weightSum[i]);
             }
 
             for (int i = 0; i < neuronCount; i++) {
