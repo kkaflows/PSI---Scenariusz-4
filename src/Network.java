@@ -32,7 +32,7 @@ public class Network {
 
     public void loadTrainData() throws FileNotFoundException {
         try {
-             scanner = new Scanner(new File("learnOnlyLetterBinary.txt"));
+             scanner = new Scanner(new File("learnOnlyLetterBinary2.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -70,13 +70,13 @@ public class Network {
             double[] weightSum = new double[neuronCount];
             for (int i = 0; i < neuronCount; i++) {
                 weightSum[i] = neurons[i].calculateWeightSum();
-                System.out.println(weightSum[i]);
+//                System.out.println(weightSum[i]);
             }
 
             for (int i = 0; i < neuronCount; i++) {
                 for (int j = 0; j < inputSize; j++) {
 
-//                    double deltaW = neurons[i].learningRate * neurons[i].input[j] * neurons[i].calculateSigmoid2(weightSum[i]);
+//                    double deltaW = neurons[i].learningRate * neurons[i].input[j] * neurons[i].calculateSigmoid(weightSum[i]);
 //                    neurons[i].weights[j] = neurons[i].weights[j] * (1 - neurons[i].forgetRate) + deltaW;
                     neurons[i].weights[j] = neurons[i].weights[j]*neurons[i].forgetRate + neurons[i].learningRate*neurons[i].calculateSigmoid(weightSum[i])*(neurons[i].input[j] - neurons[i].weights[j]);
 
@@ -100,23 +100,13 @@ public class Network {
                 double weightSum = neurons[i].calculateWeightSum();
                 result[i] = neurons[i].calculateSigmoid2(weightSum);
             }
-            System.out.println("Letter = " + (char) (letterNumber + 65));
-            int sumResult = 0;
+//            System.out.println("Letter = " + (char) (letterNumber + 65));
+//            for (int i = 0; i < neuronCount; i++) {
+//                System.out.println("Neuron "+i+ " = "+result[i]);
+//            }
+            System.out.println((char)(letterNumber + 65) + " "+result[0]);
 
-                for (int j = 0; j < neuronCount; j++) {
-                    sumResult +=result[j];
-                }
-//                if(sumResult > 0){
-//                    System.out.println("Group 1");
-//                }else if(sumResult <0){
-//                    System.out.println("        Group 2");
-//                }else if( sumResult == 0){
-//                    System.out.println("                Group 3");
-//                }
 
-            for (int i = 0; i < neuronCount; i++) {
-                System.out.println("Neuron "+i+ " = "+result[i]);
-            }
 
 
         }
